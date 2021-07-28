@@ -9,35 +9,38 @@
     <!-- Topbar header - style you can find in topbar.scss -->
     <!-- ============================================================== -->
     <header class="topbar" [attr.data-navbarbg]="options.navbarbg">
-        <nav class="d-flex top-navbar navbar-expand-lg"
+        <nav class="d-flex top-navbar navbar-expand-lg shadow"
             [ngClass]="(options.navbarbg=='skin6')?'navbar-light':'navbar-dark'">
+            <!-- <app-hamburger></app-hamburger> -->
             <div class="navbar-header" [ngClass]="(expandLogo)?'expand-logo':''" [attr.data-logobg]="options.logobg">
+                <app-hamburger (toggleSidebar)="toggleSidebarType()"></app-hamburger>
                 <!-- This is for the sidebar toggle which is visible on mobile only -->
                 <a (click)="showMobileMenu = !showMobileMenu"
-                    class="nav-toggler waves-effect waves-light d-block d-lg-none" href="javascript:void(0)">
-                    <i [ngClass]="(showMobileMenu)?'ti-close':'ti-menu'"></i>
+                    class="nav-toggler waves-effect waves-light d-block d-lg-none position-absolute" href="javascript:void(0)">
+                    <i [ngClass]="(showMobileMenu)?'ti-close':'ti-menu'" class="text-white"></i>
                 </a>
                 <!-- ============================================================== -->
                 <!-- Logo -->
                 <!-- ============================================================== -->
-                <a class="navbar-brand" href="/">
-                    <!-- Logo icon -->
-                    <b class="logo-icon">
-                        <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                        <!-- Dark Logo icon -->
-                        <img src="assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
-                        <!-- Light Logo icon -->
-                        <img src="assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
-                    </b>
+                <a class="navbar-brand" href="app/documents-upload">
+                        <b class="logo-icon mt-1 ml-n2">
+                             <img *ngIf = "logoLogin" src="assets/images/logo-login.png"  class="dark-logo light-logo-stamp logoStyle"  />
+                        </b>
                     <!--End Logo icon -->
                     <!-- Logo text -->
-                    <span class="logo-text">
-                        <!-- dark Logo text -->
-                        <img src="assets/images/logo-text.png" alt="homepage" class="dark-logo" />
-                        <!-- Light Logo text -->
-                        <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
-                    </span>
+                        <span class="logo-text">
+                            <!-- dark Logo text -->
+    
+                            <!-- <img src="assets/images/logo-trillo.png" alt="" class="dark-logo pl-2" height="45px"/> -->
+                            
+                            <!-- <img src="assets/images/logo-login.png" alt="homepage" class="dark-logo light-logo-stamp" style="height: 52px;" /> -->
+                            <!-- Light Logo text -->
+                           
+                            <img *ngIf = "logoTrillo" src="assets/images/logo-trillo.png" alt="" class="dark-logo pl-2" height="27px"/>
+                        </span>
+                    
                 </a>
+                
                 <!-- ============================================================== -->
                 <!-- End Logo -->
                 <!-- ============================================================== -->
@@ -45,26 +48,26 @@
                 <!-- Toggle which is visible on mobile only -->
                 <!-- ============================================================== -->
                 <a class="topbartoggler d-block d-lg-none waves-effect waves-light" href="javascript:void(0)"
-                    (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+                    (click)="isCollapsed = !isCollapsed"   [attr.aria-expanded]="!isCollapsed"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent">
-                    <i class="ti-more"></i>
+                    <i class="ti-more text-white"></i>
                 </a>
             </div>
             <!-- ============================================================== -->
             <!-- End Logo -->
             <!-- ============================================================== -->
             <div class="navbar-collapse collapse" id="navbarSupportedContent" [attr.data-navbarbg]="options.navbarbg"
-                [ngbCollapse]="!isCollapsed">
+                [ngbCollapse]="!isCollapsed" >
                 <!-- Horizontal Header -->
                 <div *ngIf="options.layout==='horizontal' else vheader" class="w-100">
-                    <app-horizontal-navigation class="w-100 d-flex align-items-center justify-content-between">
+                    <app-horizontal-navigation class="w-100 d-flex align-items-center justify-content-between" >
                     </app-horizontal-navigation>
                 </div>
 
                 <!-- Vertical Header -->
                 <ng-template #vheader>
                     <div class="w-100">
-                        <app-vertical-navigation (toggleSidebar)="toggleSidebarType()">
+                        <app-vertical-navigation (toggleSidebar)="toggleSidebarType()" >
                         </app-vertical-navigation>
                     </div>
                 </ng-template>
@@ -82,7 +85,7 @@
 
         <!-- Horizontal Header -->
         <ng-template #vlayout>
-            <div class="scroll-sidebar" [perfectScrollbar]="config">
+            <div class="scroll-sidebar mt-4" [perfectScrollbar]="config">
                 <app-vertical-sidebar [showClass]='showMobileMenu' (notify)='handleClick($event)'>
                 </app-vertical-sidebar>
             </div>
@@ -115,9 +118,9 @@
         <!-- ============================================================== -->
         <!-- footer -->
         <!-- ============================================================== -->
-        <footer class="footer">
+        <!-- <footer class="footer">
             © copyright Admin Pro Angular by <a href="https://www.wrappixel.com/">wrappixel.com</a>
-        </footer>
+        </footer> -->
         <!-- ============================================================== -->
         <!-- End footer -->
         <!-- ============================================================== -->
@@ -126,10 +129,10 @@
     <!-- End Page wrapper  -->
     <!-- ============================================================== -->
     <aside class="customizer" [ngClass]="{'show-service-panel': showSettings}">
-        <a href="javascript:void(0)" class="btn-dark btn btn-circle btn-lg service-panel-toggle"
+        <!-- <a href="javascript:void(0)" class="btn-dark btn btn-circle btn-lg service-panel-toggle"
             (click)="showSettings = !showSettings">
             <i class="fa fa-spin fa-cog"></i>
-        </a>
+        </a> -->
         <div class="customizer-body custom-pills" [perfectScrollbar]="config">
             <ngb-tabset type="pills" [justify]="tabStatus">
                 <ngb-tab>

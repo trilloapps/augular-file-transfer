@@ -20,7 +20,7 @@
         background: $skin5;
       }
       &[data-logobg="skin6"] {
-        background: $skin6;
+        background: $skin11 !important;
         .navbar-brand {
           .dark-logo {
             display: inline;
@@ -53,7 +53,7 @@
         background: $skin5;
       }
       &[data-navbarbg="skin6"] {
-        background: $skin6;
+        background: $skin9;
       }
     }
     /*This is for the sidebar bg*/
@@ -91,7 +91,7 @@
       }
       &[data-sidebarbg="skin5"],
       &[data-sidebarbg="skin5"] ul {
-        background: $skin5;
+        background: $skin6;
         .create-btn {
           background: $cyan;
         }

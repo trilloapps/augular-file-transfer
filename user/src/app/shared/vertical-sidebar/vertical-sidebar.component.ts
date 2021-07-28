@@ -3,6 +3,7 @@ import { RouteInfo } from './vertical-sidebar.metadata';
 import { VerticalSidebarService } from './vertical-sidebar.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DataService } from 'src/app/services/DataService';
 declare var $: any;
 
 @Component({
@@ -24,21 +25,97 @@ export class VerticalSidebarComponent {
     this.notify.emit(!this.showClass);
   }
 
-  constructor(private menuServise: VerticalSidebarService, private router: Router) {
-    this.menuServise.items.subscribe(menuItems => {
+  userType: string = '';
+  constructor(private menuServise: VerticalSidebarService, private router: Router, private dataService: DataService,) {
+
+  }
+  ngOnInit() {
+   
+    this.dataService.getObservable().subscribe((data) => {
+        this.userType = data.userRole
+        localStorage.setItem('userType',this.userType);
+    })
+    this.checkRoleInMenu()
+  }
+ 
+
+
+checkRoleInMenu(){
+  let role = localStorage.getItem('userType');
+  if (role == 'user') {
+  this.menuServise.items.subscribe(async menuItems => {
+    this.sidebarnavItems = menuItems;
+    // Active menu 
+    if (menuItems) {
       this.sidebarnavItems = menuItems;
 
       // Active menu 
       this.sidebarnavItems.filter(m => m.submenu.filter(
         (s) => {
+
           if (s.path === this.router.url) {
             this.path = m.title;
+
           }
         }
       ));
       this.addExpandClass(this.path);
-    });
-  }
+    } else {
+
+      this.sidebarnavItems = menuItems;
+
+      // Active menu 
+      this.sidebarnavItems.filter(m => m.submenu.filter(
+        (s) => {
+
+          if (s.path === this.router.url) {
+            this.path = m.title;
+
+          }
+        }
+      ));
+      this.addExpandClass(this.path);
+    }
+  });
+}
+else{
+  this.menuServise.adminItems.subscribe(async menuItems => {
+    this.sidebarnavItems = menuItems;
+    // Active menu 
+    if (menuItems) {
+
+      this.sidebarnavItems = menuItems;
+
+      // Active menu 
+      this.sidebarnavItems.filter(m => m.submenu.filter(
+        (s) => {
+
+          if (s.path === this.router.url) {
+            this.path = m.title;
+
+          }
+        }
+      ));
+      this.addExpandClass(this.path);
+    } else {
+
+      this.sidebarnavItems = menuItems;
+
+      // Active menu 
+      this.sidebarnavItems.filter(m => m.submenu.filter(
+        (s) => {
+
+          if (s.path === this.router.url) {
+            this.path = m.title;
+
+          }
+        }
+      ));
+      this.addExpandClass(this.path);
+    }
+  });
+}
+}
 
   addExpandClass(element: any) {
     if (element === this.showMenu) {
@@ -61,3 +138,4 @@ export class VerticalSidebarComponent {
     });
   }
 }
+

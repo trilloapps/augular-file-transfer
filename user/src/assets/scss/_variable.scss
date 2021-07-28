@@ -17,14 +17,18 @@ $skin2: #00acc1;
 $skin3: #f62d51;
 $skin4: #1976d2;
 $skin5: #242a33;
+$skin8: #2da7df;
 $skin6: #fff;
+$skin9:#1e88e5;
+$skin10: #607d8b;
+$skin11:#1c81d9;
 
 // ======================================================
 // Topbar settings
 // ======================================================
 
 $topbar: $theme-light;
-$topbar-height: 60px;
+$topbar-height: 70px;
 $topbar-navlink-padding: 0px 0.75rem;
 $topbar-navlink-font-size: 15px;
 $topbar-navlink-height: 60px;
@@ -40,10 +44,12 @@ $sidebar-text: #fff;
 $sidebar-icons: #fff;
 $sidebar-text-dark: #687384;
 $sidebar-icons-dark: #555f6d;
-
-$sidebar-width-full: 240px;
+$sidebar-text-color:#607d8b;
+//$sidebar-hover-color: #fff;
+$sidebar-hover-color:#00acc1;
+$sidebar-width-full: 280px;
 $sidebar-width-iconbar: 180px;
-$sidebar-width-mini: 70px;
+$sidebar-width-mini: 100px;
 
 // ======================================================
 // Layout settings

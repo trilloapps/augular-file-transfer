@@ -2,8 +2,30 @@
 // `ng build ---prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { HttpHeaders } from "@angular/common/http";
+
 export const environment = {
-  production: false
+  production: false,
+  // apiUrl: 'https://app-dev.cb-portal.trilloapps.com',
+  apiUrl: ' https://apps-demo-1.trilloapps.com/',
+  AdminRoute:'https://apps-demo-1.trilloapps.com/cloud/UM',
+
+  httpOptions: {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'x-app-name': 'auth',
+      'x-org-name': 'cloud',
+    })
+  },
+  httpOptionsWithAccessToken: {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'x-app-name': 'main',
+      'x-org-name': 'cloud',
+    })
+  }
 };
 
 /*

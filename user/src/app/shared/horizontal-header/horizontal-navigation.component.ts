@@ -2,6 +2,7 @@ import { Component, AfterViewInit, EventEmitter, Output } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbPanelChangeEvent, NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { TranslateService } from '@ngx-translate/core';
+import { DataService } from 'src/app/services/DataService';
 
 declare var $: any;
 
@@ -111,14 +112,16 @@ export class HorizontalNavigationComponent implements AfterViewInit {
     code: 'de',
     icon: 'de'
   }]
+  body: { sqlTemplate: string; size: number; start: number; className: string; };
 
-  constructor(private modalService: NgbModal, private translate: TranslateService) {
+  constructor(private modalService: NgbModal, private translate: TranslateService,private dataService: DataService) {
 
     translate.setDefaultLang('en');
 
   }
 
-  ngAfterViewInit() { }
+  async ngAfterViewInit() {
+   }
 
   changeLanguage(lang: any) {
     this.translate.use(lang.code)

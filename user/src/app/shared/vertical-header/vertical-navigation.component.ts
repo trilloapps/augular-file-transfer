@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, EventEmitter, Output } from '@angular/core';
+import { Component, AfterViewInit, EventEmitter, Output, ViewChild } from '@angular/core';
 import {
   NgbModal,
   ModalDismissReasons,
@@ -7,6 +7,11 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { TranslateService } from '@ngx-translate/core';
+import { DataService } from 'src/app/services/DataService';
+import { Observable } from 'rxjs/Observable';
+import { FileName } from 'src/app/models/FileName.interface';
+import { Router } from '@angular/router';
+import { DatatableComponent } from '@swimlane/ngx-datatable';
 declare var $: any;
 
 @Component({
@@ -18,7 +23,7 @@ export class VerticalNavigationComponent implements AfterViewInit {
 
   public config: PerfectScrollbarConfigInterface = {};
 
-  public showSearch = false;
+  public showSearch = true;
 
   // This is for Notifications
   notifications: Object[] = [
@@ -112,17 +117,48 @@ export class VerticalNavigationComponent implements AfterViewInit {
     code: 'de',
     icon: 'de'
   }]
+  user: string;
 
 
 
-  constructor(private modalService: NgbModal, private translate: TranslateService) {
+  constructor(private modalService: NgbModal, public router: Router, private translate: TranslateService, private dataService: DataService,) {
+    this.user = localStorage.getItem("username");
     translate.setDefaultLang('en');
   }
-
+  Navigation_PageReload() {
+    window.location.reload();
+  }
+  options$: Observable<FileName[]>;
+  keyword = 'patientName';
   changeLanguage(lang: any) {
     this.translate.use(lang.code)
     this.selectedLanguage = lang;
   }
-
   ngAfterViewInit() { }
+  getServerResponse(terms) {
+    console.log("input ", terms);
+    if (terms !== '') {
+      this.dataService.DataService_StandardSearch(terms).subscribe(
+        (result: any) => {
+          ;
+          console.log("result ", result)
+          this.options$ = result;
+        }
+      );
+    }
+  }
+  selectEvent(selectedItem) {
+    console.log("selectEvent ", selectedItem);
+  }
+  catchAdvanceSearchEvent(message: string) {
+    console.log("message ====>" + message);
+    this.router.navigate(['/app/documents-upload']);
+  }
+
+  logout() {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("username");
+    this.router.navigate(['/authentication/login']);
+
+  }
 }

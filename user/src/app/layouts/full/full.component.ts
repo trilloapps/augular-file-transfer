@@ -1,5 +1,6 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, EventEmitter, Output , ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { ResizedEvent } from 'angular-resize-event';
 declare var $: any;
 
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
@@ -10,19 +11,23 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
   styleUrls: ['./full.component.scss']
 })
 export class FullComponent implements OnInit {
+  @Output() toggleSidebar = new EventEmitter<void>();
   public config: PerfectScrollbarConfigInterface = {};
-
-  constructor(public router: Router) { }
-
+ 
+  constructor(public router: Router ) { }
+  
   tabStatus = 'justified';
 
-  public isCollapsed = false;
+  public isCollapsed = true;
 
   public innerWidth: any;
   public defaultSidebar: any;
   public showSettings = false;
   public showMobileMenu = false;
   public expandLogo = false;
+  logoLogin = false
+  logoTrillo = false
+  status = false;
 
   options = {
     theme: 'light', // two possible values: light, dark
@@ -42,6 +47,7 @@ export class FullComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.logoTrillo = true
     if (this.router.url === '/') {
       this.router.navigate(['/dashboard/classic']);
     }
@@ -59,16 +65,23 @@ export class FullComponent implements OnInit {
     switch (this.defaultSidebar) {
       case 'full':
       case 'iconbar':
-        if (this.innerWidth < 1170) {
+        if (this.innerWidth < 1024) {
           this.options.sidebartype = 'mini-sidebar';
+          this.logoTrillo=true;
+          this.logoLogin=false;
         } else {
           this.options.sidebartype = this.defaultSidebar;
+          this.logoTrillo=true;
+          this.logoLogin=false;
         }
         break;
 
       case 'overlay':
         if (this.innerWidth < 767) {
           this.options.sidebartype = 'mini-sidebar';
+          //console.log("logologin")
+          //this.logoLogin=true;
+          //this.logoTrillo=false;
         } else {
           this.options.sidebartype = this.defaultSidebar;
         }
@@ -79,10 +92,14 @@ export class FullComponent implements OnInit {
   }
 
   toggleSidebarType() {
+    
     switch (this.options.sidebartype) {
       case 'full':
-      case 'iconbar':
+      //case 'iconbar':
         this.options.sidebartype = 'mini-sidebar';
+       this.logoTrillo = !this.logoTrillo;
+       this.logoLogin = !this.logoLogin
+
         break;
 
       case 'overlay':
@@ -91,8 +108,12 @@ export class FullComponent implements OnInit {
 
       case 'mini-sidebar':
         if (this.defaultSidebar === 'mini-sidebar') {
+         
           this.options.sidebartype = 'full';
         } else {
+          this.logoLogin = !this.logoLogin
+          this.logoTrillo = !this.logoTrillo;
+      
           this.options.sidebartype = this.defaultSidebar;
         }
         break;
@@ -103,5 +124,8 @@ export class FullComponent implements OnInit {
 
   handleClick(event: boolean) {
     this.showMobileMenu = event;
+  }
+  clickEvent() {
+    this.status = !this.status;
   }
 }

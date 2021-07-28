@@ -42,8 +42,8 @@ sidebar navigation
       // width: $sidebar-width-full;
       margin-bottom: 5px;
       .sidebar-link {
-        color: $sidebar-text;
-        padding: $sidebar-link-padding;
+        color: $skin10;
+        padding: 5px 15px;
         display: flex;
         white-space: nowrap;
         align-items: center;
@@ -51,15 +51,18 @@ sidebar navigation
         opacity: 0.6;
         cursor: pointer;
         font-size: 14px;
+        width: 90%;
+        margin-left: 14px;
         i-feather {
-          margin: 0 8px 2px 5px;
+          margin: 8px 0px 0px 0px;
+
         }
         .feather {
           height: 18px;
           width: 18px;
           margin: 0 8px 2px 5px;
           fill: rgba(255, 255, 255, 0.2);
-          color: $sidebar-icons;
+          //color: $sidebar-icons;
         }
         .side-badge.badge {
           position: absolute;
@@ -70,26 +73,45 @@ sidebar navigation
         }
         i {
           font-style: normal;
-          width: 35px;
-          line-height: 25px;
-          font-size: $sidebar-icon-size;
-          color: $sidebar-icons;
+          width: 30px;
+          line-height: 20px;
+          //font-size: $sidebar-icon-size;
+          margin-left: -6px;
+          //color: $skin10;
           display: inline-block;
           text-align: center;
         }
-        &.active,
+        &.active{
+          opacity: 1;
+          color: #fff !important;
+          background: #1e88e5;
+          //background-color:#1e90ff;
+          border-radius: 6px;
+        }
+        
+        
         &:hover {
+          color:$sidebar-hover-color;
           opacity: 1;
           .feather {
-            color: $white;
+            //color: $white;
           }
         }
       }
-      &.selected > .sidebar-link,
+      &.selected > .sidebar-link{
+        // background-color:dodgerblue;
+        color: $white;
+      }
+      &.selected > .sidebar-link:hover{
+        // background-color:dodgerblue;
+        color: $white;
+      }
       &:hover > .sidebar-link {
+        color: $sidebar-hover-color;
         /*background: rgba(0, 0, 0, 0.04);*/
         opacity: 1;
       }
+      
       /*******************
 					 First level
 					 ******************/
@@ -137,6 +159,7 @@ sidebar navigation
     }
   }
 }
+
 /*******************
  common m-p removed
 ******************/
@@ -221,6 +244,8 @@ Down arrow
   text-overflow: ellipsis;
   white-space: nowrap;
   margin-right: 35px;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 @media screen and (width: 1024px) {

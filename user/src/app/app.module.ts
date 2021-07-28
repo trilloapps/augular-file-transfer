@@ -5,7 +5,7 @@ import {
 } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -38,8 +38,14 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
-
+import { TrilloDicomInterceptor } from './services/trillo.interceptor';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ClipboardModule } from '@angular/cdk/clipboard'
+import { BnNgIdleService } from 'bn-ng-idle'; // import bn-ng-idle service
+import { AngularResizedEventModule } from 'angular-resize-event';
+import { HamburgerComponent } from './layouts/hamburger/hamburger.component';
+import { FilePickerModule } from  'ngx-awesome-uploader';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -66,9 +72,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BreadcrumbComponent,
     VerticalSidebarComponent,
     HorizontalNavigationComponent,
-    HorizontalSidebarComponent
+    HorizontalSidebarComponent,
+    HamburgerComponent,
   ],
   imports: [
+    ClipboardModule,
     CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
@@ -86,19 +94,30 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NgMultiSelectDropDownModule.forRoot(),
     AgmCoreModule.forRoot({ apiKey: 'AIzaSyDoliAneRffQDyA7Ul9cDk3tLe7vaU4yP8' }),
     HttpClientModule,
+    NgxDatatableModule,
+    AngularResizedEventModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    
+    AutocompleteLibModule,
+    FilePickerModule
   ],
   providers: [
+    BnNgIdleService,
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    }
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TrilloDicomInterceptor,
+      multi: true
+      }
   ],
   bootstrap: [AppComponent]
 })

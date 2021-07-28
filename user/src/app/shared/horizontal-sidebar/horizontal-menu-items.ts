@@ -2,6 +2,7 @@ import { RouteInfo } from './horizontal-sidebar.metadata';
 
 export const ROUTES: RouteInfo[] = [
     {
+        
         path: "",
         title: "Home",
         icon: "home",

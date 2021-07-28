@@ -189,6 +189,7 @@ $left-part-width: 260px;
     &[data-sidebartype="full"] {
       .topbar .top-navbar .navbar-header {
         width: $sidebar-width-full;
+        min-height: 70px;
       }
     }
     /*Sidebar position*/
