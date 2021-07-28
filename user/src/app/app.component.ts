@@ -12,7 +12,7 @@ export class AppComponent {
     this.bnIdle.startWatching(3600).subscribe((res) => {
       if(res) {
         localStorage.clear();
-        this.router.navigate(['/authentication/login']);
+        this.router.navigate(['/login']);
           console.log("session expired");
       }
     });

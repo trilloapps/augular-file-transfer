@@ -1,16 +1,16 @@
-
-import { Component, OnInit } from "@angular/core";
-import { UploadImageService } from "../../services/uploadImage.service";
-import { DataService } from "src/app/services/DataService";
-import { DatePipe } from "@angular/common";
+import { DatePipe } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal, ModalDismissReasons, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { DataService } from '../services/DataService';
+import { UploadImageService } from '../services/uploadImage.service';
 
 @Component({
-  selector: 'app-documents-upload',
-  templateUrl: './documents-upload.component.html',
-  styleUrls: ['./documents-upload.component.css']
+  selector: 'app-file-upload',
+  templateUrl: './file-upload.component.html',
+  styleUrls: ['./file-upload.component.css']
 })
-export class DocumentsUploadComponent implements OnInit {
+export class FileUploadComponent implements OnInit {
   bDisplayFilesUploadSection : boolean = true;
   newArray: any = [];
   filesArray = [];
@@ -20,10 +20,10 @@ export class DocumentsUploadComponent implements OnInit {
   bEnabledirectoryUploadSupport : boolean = false;
   closeResult: string;
 
-  constructor(private oUploadImageService: UploadImageService,private dataService: DataService,private datePipe: DatePipe,private modalService: NgbModal) {}
+  constructor(private oUploadImageService: UploadImageService,private dataService: DataService,private datePipe: DatePipe,private modalService: NgbModal, private oRouter : Router) {}
   async ngOnInit(): Promise<void> {}
 
-  DocumentsUploadComponent_ToggleFileUploadType(event) 
+  FileUploadComponent_ToggleFileUploadType(event) 
   {
     const sFileUploadType = event.target.value;
     if (sFileUploadType === "file") 
@@ -36,11 +36,11 @@ export class DocumentsUploadComponent implements OnInit {
       this.bEnableFilesUploadSupport = false;
       this.bEnabledirectoryUploadSupport = true;
     }
-    console.log("DocumentsUploadComponent_ToggleFileUploadType : Upload Files ==> ",this.bEnableFilesUploadSupport);
-    console.log("DocumentsUploadComponent_ToggleFileUploadType : Upload Directory ==> ",this.bEnabledirectoryUploadSupport);
+    console.log("FileUploadComponent_ToggleFileUploadType : Upload Files ==> ",this.bEnableFilesUploadSupport);
+    console.log("FileUploadComponent_ToggleFileUploadType : Upload Directory ==> ",this.bEnabledirectoryUploadSupport);
   }
  
-  DocumentsUploadComponent_DisplayFilesUploadProgressPopUp(fileUploadProgressPopUP: string) {
+  FileUploadComponent_DisplayFilesUploadProgressPopUp(fileUploadProgressPopUP: string) {
     let ngbModalOptions: NgbModalOptions = {
       backdrop : 'static',
       size : 'md',
@@ -51,13 +51,13 @@ export class DocumentsUploadComponent implements OnInit {
     this.modalService.open(fileUploadProgressPopUP, ngbModalOptions).result.then((result) => 
     {
       console.log("Result ==> ",result);
-      this.DocumentsUploadComponent_ResetView();
+      this.FileUploadComponent_ResetView();
       this.closeResult = `Closed with: ${result}`;
     }, 
     (reason) => 
     {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      this.DocumentsUploadComponent_ResetView();
+      this.FileUploadComponent_ResetView();
     });
   }
 
@@ -76,7 +76,7 @@ export class DocumentsUploadComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-  DocumentsUploadComponent_ResetView() 
+  FileUploadComponent_ResetView() 
   {
     this.bDisplayFilesUploadSection = true;
     this.filesArray = [];
@@ -85,10 +85,10 @@ export class DocumentsUploadComponent implements OnInit {
     this.bEnabledirectoryUploadSupport=false;
   }
 
-  UploadComponent_FileBrowseHandler(event,fileUploadProgressPopUP) 
+  FileUploadComponent_FileBrowseHandler(event,fileUploadProgressPopUP) 
   {
     let filesToUploadArray = event.target.files;
-    console.log("UploadComponent_FileBrowseHandler : Files to upload ==> ",filesToUploadArray);
+    console.log("FileUploadComponent_FileBrowseHandler : Files to upload ==> ",filesToUploadArray);
     for (let i = 0; i < filesToUploadArray.length; i++) 
       {
         let firsLetterOfFile = filesToUploadArray[i].name.charAt(0);
@@ -102,10 +102,10 @@ export class DocumentsUploadComponent implements OnInit {
           };
         }
       }
-    this.DocumentsUploadComponent_UploadFiles(fileUploadProgressPopUP);
+    this.FileUploadComponent_UploadFiles(fileUploadProgressPopUP);
   }
   
-  async DocumentsUploadComponent_UploadFiles(fileUploadProgressPopUP) 
+  async FileUploadComponent_UploadFiles(fileUploadProgressPopUP) 
   {
       this.bDisplayFilesUploadSection = false;
       this.nLenghtOfFilesArray = 0;
@@ -114,13 +114,13 @@ export class DocumentsUploadComponent implements OnInit {
       this.dParentFolder = 'DCM' + this.dParentFolder;
       this.callRequests();
       //display upload progress pop up
-      this.DocumentsUploadComponent_DisplayFilesUploadProgressPopUp(fileUploadProgressPopUP);
+      this.FileUploadComponent_DisplayFilesUploadProgressPopUp(fileUploadProgressPopUP);
   }
 
   callRequests() 
   {
-      this.DocumentsUploadComponent_GetSignedUrl(this.newArray[this.nLenghtOfFilesArray], this.filesArray[this.nLenghtOfFilesArray].fullPath, this.nLenghtOfFilesArray, this.filesArray[this.nLenghtOfFilesArray].name, this.filesArray[this.nLenghtOfFilesArray].type, this.filesArray[this.nLenghtOfFilesArray].size).then(async (value) => {
-        console.log('DocumentsUploadComponent_GetSignedUrl : Final Responce =====> ', value);
+      this.FileUploadComponent_GetSignedUrl(this.newArray[this.nLenghtOfFilesArray], this.filesArray[this.nLenghtOfFilesArray].fullPath, this.nLenghtOfFilesArray, this.filesArray[this.nLenghtOfFilesArray].name, this.filesArray[this.nLenghtOfFilesArray].type, this.filesArray[this.nLenghtOfFilesArray].size).then(async (value) => {
+        console.log('FileUploadComponent_GetSignedUrl : Final Responce =====> ', value);
       if(value) 
       {
         this.nLenghtOfFilesArray++;
@@ -131,8 +131,6 @@ export class DocumentsUploadComponent implements OnInit {
         else 
         {
           let userName = await localStorage.getItem("username");
-          console.log("Username ==> ", userName);
-          console.log("this.dParentFolder ==> ", this.dParentFolder);
           this.dataService.DataService_SendFolderName({ "uploadFolder": "/users/" + userName + "/Home/_upload/" + this.dParentFolder }).subscribe((result: any) => 
           {
           console.log('DataService_SendFolderName : ==> ', result);
@@ -142,7 +140,7 @@ export class DocumentsUploadComponent implements OnInit {
        // expected output: "Success!"
     });
   }
-  async DocumentsUploadComponent_GetSignedUrl(sFileBase64Url, sWebkitRelativePath, nFileIndex, sFileName, sFileType, sFileSize): Promise<any> 
+  async FileUploadComponent_GetSignedUrl(sFileBase64Url, sWebkitRelativePath, nFileIndex, sFileName, sFileType, sFileSize): Promise<any> 
   {
     var promise = new Promise(async (resolve, reject) => 
     {
@@ -165,6 +163,7 @@ export class DocumentsUploadComponent implements OnInit {
         "folderName": "/users/" + userName + "/Home/_upload",
         "subFolder": sSubFolderPath,
       };
+      console.log("Retrieve signed url body ==> ",sRetrieveSignedUrlBody);
       this.oUploadImageService.UploadImageService_RetrieveSignedUrl(sRetrieveSignedUrlBody).subscribe(oRetrieveSignedUrlResponse => 
       {
         console.log("UploadComponent_GetSignedUrl: UploadImageService_SaveFileObject Response =>", oRetrieveSignedUrlResponse);
@@ -198,5 +197,9 @@ export class DocumentsUploadComponent implements OnInit {
     });
     return promise;
   }
-  
+  FileUploadComponent_Logout()
+  {
+    localStorage.clear();
+    this.oRouter.navigate(["/login"]);
+  }
 }

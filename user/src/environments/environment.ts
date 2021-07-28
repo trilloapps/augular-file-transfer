@@ -10,24 +10,24 @@ export const environment = {
   apiUrl: ' https://apps-demo-1.trilloapps.com/',
   AdminRoute:'https://apps-demo-1.trilloapps.com/cloud/UM',
 
-  httpOptions: {
+  httpOptions: 
+  {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'x-app-name': 'auth',
-      'x-org-name': 'cloud',
-    })
+                               'Content-Type': 'application/json',
+                               'Accept': 'application/json',
+                               'x-app-name': 'auth',
+                               'x-org-name': 'cloud',
+                             })
   },
   httpOptionsWithAccessToken: {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'x-app-name': 'main',
-      'x-org-name': 'cloud',
-    })
-  }
+                               'Content-Type': 'application/json',
+                               'Accept': 'application/json',
+                               'x-app-name': 'main',
+                               'x-org-name': 'cloud',
+                             })
+  },
 };
-
 /*
  * In development mode, to ignore zone related error stack frames such as
  * `zone.run`, `zoneDelegate.invokeTask` for easier debugging, you can

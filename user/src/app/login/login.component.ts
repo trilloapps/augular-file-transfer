@@ -67,7 +67,7 @@ export class LoginComponent {
         localStorage.setItem("tenant",tanantName);
         localStorage.setItem("userRole",userRole);
         this.loginSpinner = false;
-        this.routes.navigate(['/app/documents-upload']);
+        this.routes.navigate(['/file-upload']);
       },
       err => {
         localStorage.removeItem("accessToken");

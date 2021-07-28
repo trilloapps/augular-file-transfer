@@ -3,7 +3,6 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {environment} from 'src/environments/environment';
 import {HttpHeaders} from "@angular/common/http";
-import {local} from 'd3';
 
 let accessToken = localStorage.getItem("accessToken");
 let httpOptions = {

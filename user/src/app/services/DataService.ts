@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
-import { pluck } from 'rxjs/operators';
-import { FileName } from '../models/FileName.interface';
 import { environment } from 'src/environments/environment';
-//const apiUrl = 'https://api.mixcloud.com';
+
 let accessToken =  localStorage.getItem("accessToken");
 const httpOptions = {
   headers: new HttpHeaders({

@@ -1,30 +1,36 @@
-import { Routes} from '@angular/router';
-import { FullComponent } from './layouts/full/full.component';
-import { BlankComponent } from './layouts/blank/blank.component';
-import { AuthGuard } from './services/auth.guard';
 
-export const Approutes: Routes = [
-	{
-		path: '',
-		component: FullComponent,
-		children: [
-			{ path: '', redirectTo: '/authentication/login', pathMatch: 'full' },
-			{ path: 'app', loadChildren: () => import('./apps/apps.module').then(m => m.AppsModule) , canActivate: [AuthGuard]},
-		]
-	},
-	{
-		path: '',
-		component: BlankComponent,
-		children: [
-			{
-				path: 'authentication',
-				loadChildren:
-					() => import('./authentication/authentication.module').then(m => m.AuthenticationModule)
-			}
-		]
-	},
-	{
-		path: '**',
-		redirectTo: '/authentication/404'
-	}
-];
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { LoginComponent } from './login/login.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { NotfoundComponent } from './404/not-found.component';
+
+const routes: Routes = [
+  {
+    path : '',
+    component : LoginComponent
+  },
+  {
+    path : 'login',
+    component : LoginComponent
+  },
+  {
+    path : 'file-upload',
+    component : FileUploadComponent
+  },
+  {
+    path : '404',
+    component :NotfoundComponent
+  },
+  {
+    path : '**',
+    redirectTo : '404',
+    pathMatch : 'full'
+  },
+  ];
+  
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
