@@ -42,6 +42,7 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/chartist/dist/chartist.min.css",
               "node_modules/flatpickr/dist/flatpickr.css",
               "node_modules/c3/c3.min.css",
@@ -54,7 +55,8 @@
               "node_modules/@swimlane/ngx-datatable/themes/material.css",
               "node_modules/@swimlane/ngx-datatable/assets/icons.css",
               "src/assets/vendor/css-chart.css",
-              "src/assets/scss/style.scss"
+              "src/assets/scss/style.scss",
+              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css"
             ],
             "scripts": []
           },

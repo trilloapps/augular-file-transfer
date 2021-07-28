@@ -2,10 +2,32 @@
 // `ng build ---prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export const environment = {
-  production: false
-};
+import { HttpHeaders } from "@angular/common/http";
 
+export const environment = {
+  production: false,
+  // apiUrl: 'https://app-dev.cb-portal.trilloapps.com',
+  apiUrl: ' https://apps-demo-1.trilloapps.com/',
+  AdminRoute:'https://apps-demo-1.trilloapps.com/cloud/UM',
+
+  httpOptions: 
+  {
+    headers: new HttpHeaders({
+                               'Content-Type': 'application/json',
+                               'Accept': 'application/json',
+                               'x-app-name': 'auth',
+                               'x-org-name': 'cloud',
+                             })
+  },
+  httpOptionsWithAccessToken: {
+    headers: new HttpHeaders({
+                               'Content-Type': 'application/json',
+                               'Accept': 'application/json',
+                               'x-app-name': 'main',
+                               'x-org-name': 'cloud',
+                             })
+  },
+};
 /*
  * In development mode, to ignore zone related error stack frames such as
  * `zone.run`, `zoneDelegate.invokeTask` for easier debugging, you can

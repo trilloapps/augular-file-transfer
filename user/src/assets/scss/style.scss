@@ -42,3 +42,45 @@ File: scss
 
 // this is for the perfect scrollbar
 @import "~perfect-scrollbar/css/perfect-scrollbar.css";
+
+.custom-class{
+   position: fixed;
+   top: 70%;
+   left: 35%;
+   
+  }
+  @media screen and (max-width: 1668px ) {
+   .custom-class{
+      left: 30%;
+   }
+ }
+ @media screen and (max-width: 1256px ) {
+   .custom-class{
+      left: 25%;
+   }
+ }
+ @media screen and (max-width: 1006px ) {
+   .custom-class{
+      left: 22%;
+   }
+ }
+ @media screen and (max-width: 895px ) {
+   .custom-class{
+      left: 18%;
+   }
+ }
+ @media screen and (max-width: 790px ) {
+   .custom-class{
+      left: 14%;
+   }
+ }
+ @media screen and (max-width: 700px ) {
+   .custom-class{
+      left: 10%;
+   }
+ }
+ @media screen and (max-width: 622px ) {
+   .custom-class{
+      left: 0%;
+   }
+ }

@@ -1,3 +1,49 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700');
+body{
+  background-color: #f2f4f8;
+}
+/*  eye-icon css */
+ span.field-icon {
+    position: absolute;
+    display: inline-block;
+    cursor: pointer;
+    right: 10px;
+    top: 10px;
+    z-index: 2;
+  }
+ /*  eye-icon css end */
+
+  /* progress bar */
+  .progress {
+    display: flex;
+    height: 11px !important;
+    overflow: hidden;
+    line-height: 0;
+    font-size: 0.75rem;
+    background-color: #ebf3f5;
+    border-radius: 2px;
+}
+.progress-bar{
+  background-color: #398bf7 !important;
+}
+.popup{
+  border-radius: 20px;
+  width: 40%;
+}
+.modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 20px !important;
+  outline: 0;
+  box-shadow: 0 2px 28px 0 rgba(0, 0, 0, 0.06) !important;
+
+}
+/* data table section */
