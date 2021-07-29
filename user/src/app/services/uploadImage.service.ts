@@ -21,14 +21,7 @@ let httpOptions = {
 export class UploadImageService
 {
 
-  constructor(private http: HttpClient)
-  {
-  }
-
-  UploadImageService_UploadImage(formData: any): Observable<any>
-  {
-    return this.http.post('https://file.io', formData, {reportProgress: true, observe: 'events'});
-  }
+  constructor(private http: HttpClient){}
 
   UploadImageService_RetrieveSignedUrl(body: any): Observable<any>
   {
