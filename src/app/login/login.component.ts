@@ -62,8 +62,9 @@ export class LoginComponent {
         let accessToken = data.accessToken;
         let userRole = data.user.role;
         let tanantName = data.user.tenantName;
+        let userId = data.user.userId;
         localStorage.setItem("accessToken",accessToken);
-        localStorage.setItem("username",this.form.controls['username'].value);
+        localStorage.setItem("userId",userId);
         localStorage.setItem("tenant",tanantName);
         localStorage.setItem("userRole",userRole);
         this.loginSpinner = false;

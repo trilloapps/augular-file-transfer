@@ -130,14 +130,14 @@ export class FileUploadComponent implements OnInit {
       sWebkitRelativePath = "";
       sSubFolderPath = "";
     }
-    let userName = await localStorage.getItem("username");
+    let userId = await localStorage.getItem("userId");
     let sRetrieveSignedUrlBody =
     {
       "fileName": sFileName,
       "folderId": "-1",
       "contentType": sFileType,
       "method": "PUT",
-      "folderName": "/users/" + userName + "/Home/_upload",
+      "folderName": "/users/" + userId + "/Home/_upload",
       "subFolder": sSubFolderPath,
     };
     console.log("UploadImageService_RetrieveSignedUrl: sRetrieveSignedUrlBody = ", sRetrieveSignedUrlBody);
@@ -158,7 +158,7 @@ export class FileUploadComponent implements OnInit {
           "fileName": sFileName,
           "folderId": "-1",
           "contentType": sFileType,
-          "folderName": "/users/" + userName + "/Home/_upload",
+          "folderName": "/users/" + userId + "/Home/_upload",
           "subFolder": sSubFolderPath
         };
         this.oUploadImageService.UploadImageService_SaveFileObject(sSaveFileObjectBody).subscribe(async oSaveFileObjectResponse => 
